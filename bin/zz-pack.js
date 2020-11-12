@@ -9,5 +9,9 @@ const config = require(path.resolve('webpack.config.js'));
 
 const Compiler = require('../lib/Compiler');
 const compiler = new Compiler(config);
+
+// 执行入口生命周期
+compiler.hooks.entryOption.call();
+
 // 标示运行编译
 compiler.run();
