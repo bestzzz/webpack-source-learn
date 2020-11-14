@@ -1,5 +1,9 @@
 # webpack打包功能的实现
 
+- 首先要明确webpack的目标。webpack将从一个入口文件进入，然后拿到这个入口文件所有的依赖(require)文件，将这些文件源码字符串和文件路径以key(路径)/value(源码)的形式存储起来，然后通过ejs模版的方式将拿到的数据填充到模版里面，这个填充后的模版就是我们要得到的目标文件(bundle.js)。
+
+- 关于webpack的ejs模版说明：这个模版里有一个`__webpack_module__`变量，和`__webpack_require__`的方法。module变量主要以 key:文件路径/value:函数(接受moduleId,webpack_require两个参数，返回eval(源码字符串)) 的形式储存。require方法主要是递归执行源代码和对一些缓存处理的封装。
+
 1. 首先拿到需要打包项目的webpack.config.js配置文件。
 
 2. 通过配置文件拿到配置的入口路径，开始构建入口模块以及递归构建所有相关依赖模块。
